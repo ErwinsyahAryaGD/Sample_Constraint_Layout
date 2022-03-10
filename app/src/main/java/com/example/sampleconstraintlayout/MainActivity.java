@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,45 +25,58 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Menghubungkan variabel btnLogin dengan componen button pada layout
-        btnLogin=findViewById(R.id.btSignin);
+        btnLogin = findViewById(R.id.btSignin);
 
         //Menghubungkan variabel edemail dengan componen button pada layout
-        edemail=findViewById(R.id.edEmail);
+        edemail = findViewById(R.id.edEmail);
 
         //Menghubungkan variabel edpassword dengan componen button pada layout
-        edpassword=findViewById(R.id.edPassword);
+        edpassword = findViewById(R.id.edPassword);
 
-        //Membuat fungsi onclick pada button btnLogin
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                //Menyimpan input user di edittext email kedalam variabel nama
                 nama = edemail.getText().toString();
-
-                //Menyimpan input user di edittext password kedalam variabel password
                 password = edpassword.getText().toString();
 
-                //Membuat variabel toast dan membuat toast dengan menambahkan variabel nama dan password
-                Toast t = Toast.makeText(getApplicationContext(),
-                        "email anda: "+nama+" dan Password anda: "+password+"", Toast.LENGTH_LONG);
-                t.show();
+                String email = "admin@mail.com";
 
+                String pass = "123";
 
-                if (edemail.equals("admin") && password.equals("admin")) {
-                    Toast.makeText(MainActivity.this, "Login Sukses", Toast.LENGTH_SHORT).show();
+                if (email.isEmpty() && password.isEmpty()) {
+                    Toast t = Toast.makeText(getApplicationContext(),
+                            "Email dan Password wajib diisi!!!", Toast.LENGTH_LONG);
+                    t.show();
+                } else {
+
+                    if (nama.equals(email) && password.equals(pass)) {
+                        Toast t = Toast.makeText(getApplicationContext(),
+                                "Login Sukses", Toast.LENGTH_LONG);
+                        t.show();
+
+                        Bundle b = new Bundle();
+
+                        b.putString("a", nama.trim());
+
+                        b.putString("b", password.trim());
+
+                        Intent i = new Intent(getApplicationContext(), ActivityKedua.class);
+
+                        i.putExtras(b);
+
+                        startActivity(i);
+                    } else {
+                        Toast t = Toast.makeText(getApplicationContext(),
+                                "Login Gagal", Toast.LENGTH_LONG);
+                        t.show();
+
+                    }
 
                 }
-                else if (edemail.equals("admin") && password.equals("admin"))
-                {
-                t.show();
 
             }
-
-
-        };
-
-
-});
+        });
     }
 }
