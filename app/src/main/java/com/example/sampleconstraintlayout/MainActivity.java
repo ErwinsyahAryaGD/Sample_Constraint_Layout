@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                         b.putString("b", password.trim());
 
-                        Intent i = new Intent(getApplicationContext(), ActivityKedua.class);
+                        Intent i = new Intent(getApplicationContext(), Home_Activity.class);
 
                         i.putExtras(b);
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.mnDaftar)
         {
 
-            Intent i = new Intent(getApplicationContext(), ActivityKetigaPendaftaran.class);
+            Intent i = new Intent(getApplicationContext(), Home_Activity.class);
             startActivity(i);
         }
 
